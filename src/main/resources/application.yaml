@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/stripe
+    username: postgres
+    password: 12345
+  jpa:
+    hibernate:
+      ddl-auto: update
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+stripe:
+  endpoint:
+    secret: whsec_6a19c2133044b262d01eb015a036536541157bd986ca27ac12072f21b06f327c
+  secret:
+    key: sk_test_51QfJQnBaF2khTmF7NggfUpjLsehS1AiNt2oY5FzUaTuILZLsdd1Mc7lHTr5O8yFFbXb7jQwllYVgAoiYMa0qng0U00HOQ5u4fz
