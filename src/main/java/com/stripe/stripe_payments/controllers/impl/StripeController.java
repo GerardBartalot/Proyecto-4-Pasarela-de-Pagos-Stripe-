@@ -1,5 +1,7 @@
 package com.stripe.stripe_payments.controllers.impl;
 
+import com.stripe.stripe_payments.commons.dto.CheckoutRequest;
+import com.stripe.stripe_payments.commons.dto.CheckoutResponse;
 import com.stripe.stripe_payments.controllers.StripeApi;
 import com.stripe.stripe_payments.services.StripeService;
 import org.springframework.http.HttpStatus;
@@ -31,6 +33,11 @@ public class StripeController implements StripeApi {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
+    }
+
+    @Override
+    public ResponseEntity<CheckoutResponse> createCheckout(CheckoutRequest checkoutRequest) {
+        return ResponseEntity.ok(stripeService.createCheckout(checkoutRequest));
     }
 
 }
