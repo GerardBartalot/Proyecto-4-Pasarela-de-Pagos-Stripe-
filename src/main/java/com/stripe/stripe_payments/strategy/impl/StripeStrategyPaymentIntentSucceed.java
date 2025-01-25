@@ -6,9 +6,11 @@ import com.stripe.stripe_payments.commons.entities.Payment;
 import com.stripe.stripe_payments.commons.enums.StripeEventEnum;
 import com.stripe.stripe_payments.repositories.PaymentRepository;
 import com.stripe.stripe_payments.strategy.StripeStrategy;
+import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
+@Component
 public class StripeStrategyPaymentIntentSucceed implements StripeStrategy {
     private final PaymentRepository paymentRepository;
 

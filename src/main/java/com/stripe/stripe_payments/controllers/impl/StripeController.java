@@ -2,7 +2,9 @@ package com.stripe.stripe_payments.controllers.impl;
 
 import com.stripe.stripe_payments.controllers.StripeApi;
 import com.stripe.stripe_payments.services.StripeService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -14,10 +16,21 @@ public class StripeController implements StripeApi {
     }
 
     @Override
-    public ResponseEntity<Void> stripeWebhook(String payload, String stripeHeader) {
-        var event = stripeService.constructEvent(payload, stripeHeader);
-        stripeService.manageWebhook(event);
+    public ResponseEntity<Void> stripeWebhook(String payload, @RequestHeader(value = "Stripe-Signature", required = false) String stripeHeader) {
+        System.out.println("Payload recibido: " + payload);
+        System.out.println("Stripe-Signature: " + stripeHeader);
 
-        return ResponseEntity.noContent().build();
+        try {
+            var event = stripeService.constructEvent(payload, stripeHeader);
+            System.out.println("Evento construido: " + event.getType());
+
+            stripeService.manageWebhook(event);
+            return ResponseEntity.noContent().build();
+        } catch (Exception e) {
+            System.err.println("Error procesando webhook: " + e.getMessage());
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
+
 }
