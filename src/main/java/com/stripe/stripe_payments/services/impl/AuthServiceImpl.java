@@ -6,7 +6,6 @@ import com.stripe.stripe_payments.commons.entities.UserModel;
 import com.stripe.stripe_payments.repositories.UserRepository;
 import com.stripe.stripe_payments.services.AuthService;
 import com.stripe.stripe_payments.services.StripeService;
-import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
